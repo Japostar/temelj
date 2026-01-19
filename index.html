@@ -1,403 +1,156 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TEMELJ</title>
-<style>
-:root{
-  --bg:#f5f6f8;
-  --card:#ffffff;
-  --ink:#374151;
-  --ink-strong:#111827;
-  --accent:#2563eb;
-  --accent-bg:#eef2ff;
-}
-body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont;background:var(--bg);color:var(--ink);line-height:1.6}
-header{background:linear-gradient(135deg,#020617,#111827);color:#e5e7eb;padding:2.2rem 1.5rem}
-h1{margin:0;font-size:1.8rem;letter-spacing:.14em}
-.subtitle{margin-top:.4rem;opacity:.85}
-nav{display:flex;background:#020617}
-nav button{flex:1;padding:1rem;background:none;border:none;color:#c7d2fe;font-weight:500}
-nav button.active{background:#ffffff;color:#020617;font-weight:600}
-main{max-width:900px;margin:auto;padding:1.6rem}
-.tab{display:none}
-.tab.active{display:block}
-.card{background:var(--card);border-radius:14px;padding:1.8rem 1.6rem;border:1px solid #e5e7eb}
-h2{font-size:1.15rem;color:var(--ink-strong);margin:1.8rem 0 .6rem}
-h3{font-size:1rem;color:var(--ink-strong);margin:1.2rem 0 .4rem;font-weight:700}
-p{margin:.45rem 0}
-ul{margin:.4rem 0 1rem .8rem;padding:0}
-li{margin:.35rem 0}
-.highlight{background:var(--accent-bg);border-left:4px solid var(--accent);padding:.9rem 1.2rem;margin:1.2rem 0;font-weight:500}
-footer{text-align:center;color:#6b7280;padding:1.6rem}
-</style>
-<script>
-function showTab(id,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TEMELJ – Platforma za odločanje</title>
+
+  <style>
+    :root{
+      --bg:#f5f6f8;
+      --card:#ffffff;
+      --ink:#374151;
+      --ink-strong:#111827;
+      --accent:#2563eb;
+      --accent-bg:#eef2ff;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+
+    header{
+      background:linear-gradient(135deg,#020617,#111827);
+      color:#e5e7eb;
+      padding:2.2rem 1.5rem;
+      text-align:center;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.9rem;
+      letter-spacing:.12em;
+    }
+
+    .subtitle{
+      margin-top:.4rem;
+      opacity:.85;
+    }
+
+    main{
+      max-width:1000px;
+      margin:auto;
+      padding:1.8rem 1.4rem 2.5rem;
+    }
+
+    .hero{margin-bottom:2rem}
+
+    .hero-item{
+      background:#fff;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      overflow:hidden;
+      margin-bottom:1.6rem;
+    }
+
+    .hero-item img{width:100%;height:auto;display:block}
+    .hero-item a{display:block;cursor:zoom-in}
+
+    .hero-caption{
+      padding:1rem 1.2rem;
+      background:#fafafa;
+      font-weight:500;
+      color:#1f2937;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:1.8rem 1.6rem;
+      border:1px solid #e5e7eb;
+      margin-bottom:1.6rem;
+    }
+
+    h2{
+      font-size:1.2rem;
+      color:var(--ink-strong);
+      margin:0 0 .6rem 0;
+    }
+
+    p{margin:.5rem 0}
+
+    .highlight{
+      background:var(--accent-bg);
+      border-left:4px solid var(--accent);
+      padding:1rem 1.2rem;
+      margin:1.2rem 0;
+      font-weight:500;
+    }
+
+    footer{
+      text-align:center;
+      color:#6b7280;
+      padding:1.8rem 1rem 2.4rem;
+      font-size:.9rem;
+    }
+  </style>
 </head>
 <body>
 
 <header>
   <h1>TEMELJ</h1>
-  <div class="subtitle">Model podatkovno vodenega odločanja in participativne demokracije</div>
+  <div class="subtitle">Vse ključne informacije o stanju države na enem mestu</div>
 </header>
-
-<style>
-.hero-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto 24px auto;
-  overflow: hidden;
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.hero-slide.active { opacity: 1; position: relative; }
-.hero-slide img { width:100%; height:auto; display:block; }
-
-.hero-arrow {
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:none;
-  border:none;
-  cursor:pointer;
-  z-index:5;
-}
-.hero-arrow svg { width:32px; height:32px; fill:#1e6bd6; }
-.hero-arrow.left { left:8px; }
-.hero-arrow.right { right:8px; }
-
-.hero-dots { text-align:center; margin-top:8px; }
-.hero-dots span {
-  display:inline-block;
-  width:10px; height:10px;
-  border-radius:50%;
-  background:#cbd5e1;
-  margin:0 4px;
-}
-.hero-dots .active { background:#1e6bd6; }
-</style>
-
-<div class="hero-wrapper">
-  <div class="hero-slide active"><a href="assets/platforma_temelj.png" target="_blank" rel="noopener"><img src="assets/platforma_temelj.png"></a></div>
-  <div class="hero-slide"><a href="assets/shema_temelj.png" target="_blank" rel="noopener"><img src="assets/shema_temelj.png"></a></div>
-
-  <button class="hero-arrow left" onclick="heroPrev()">
-    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
-  </button>
-  <button class="hero-arrow right" onclick="heroNext()">
-    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-  </button>
-</div>
-<div class="hero-dots">
-  <span class="active" onclick="heroGo(0)"></span>
-  <span onclick="heroGo(1)"></span>
-</div>
-
-<script>
-let hIndex = 0;
-const hSlides = document.querySelectorAll('.hero-slide');
-const hDots = document.querySelectorAll('.hero-dots span');
-
-function heroShow(i){
- hSlides.forEach(s=>s.classList.remove('active'));
- hDots.forEach(d=>d.classList.remove('active'));
- hSlides[i].classList.add('active');
- hDots[i].classList.add('active');
- hIndex=i;
-}
-function heroNext(){ heroShow((hIndex+1)%hSlides.length); }
-function heroPrev(){ heroShow((hIndex-1+hSlides.length)%hSlides.length); }
-function heroGo(i){ heroShow(i); }
-setInterval(heroNext,10000);
-</script>
-
-
-<nav>
-  <button class="active" onclick="showTab('master',this)">MASTER</button>
-  <button onclick="showTab('platforma',this)">PLATFORMA</button>
-</nav>
 
 <main>
 
-<!-- FIRST TAB: IDENTICAL TO TEMELJ_FINAL_MASTER_PRVI_ZAVIHEK.html -->
-<div id="master" class="tab active">
-<div class="card">
+  <section class="hero">
 
-<h2>PREAMBULA</h2>
-<p>Izhajajoč iz načel demokratične in pravne države ter zavedajoč se odgovornosti do sedanjih in prihodnjih generacij, se vzpostavlja TEMELJ kot sistem javnega odločanja Republike Slovenije.</p>
-<p>Sodobna družba zahteva, da so javne odločitve sprejemane pregledno, odgovorno in na podlagi preverljivih dejstev, ob upoštevanju njihovih dolgoročnih učinkov ter varovanja javnega interesa.</p>
-<p>Kljub temu so obstoječi mehanizmi odločanja pogosto nepregledni, fragmentirani, kratkoročni in brez sistemske odgovornosti.</p>
-<p>TEMELJ določa okvir, v katerem se javne odločitve oblikujejo, sprejemajo, izvajajo in presojajo na način, ki je razumljiv državljanom, preverljiv v času in odporen na ideološke ter posamične interese.</p>
-<p>TEMELJ temelji na prepričanju, da mora biti izvrševanje oblasti podvrženo jasnim pravilom, merljivim ciljem in stalnemu javnemu nadzoru ter ločeno od strankarskih, kratkoročnih in osebnih interesov.</p>
-<p>S TEMELJEM se zagotavlja sodelovanje državljank in državljanov pri javnem odločanju na način, ki je dostopen, sorazmeren in odgovoren, ter omogoča prenos odločevalskega vpliva ob hkratni ohranitvi preglednosti, nadzora in možnosti preklica.</p>
+    <div class="hero-item">
+      <a href="assets/shema_temelj.png" target="_blank" rel="noopener">
+        <img src="assets/shema_temelj.png" alt="TEMELJ – pregled platforme" loading="lazy" />
+      </a>
+      <div class="hero-caption">TEMELJ – pregled platforme in ključnih kazalnikov</div>
+    </div>
 
-<div class="highlight">TEMELJ ne nadomešča demokracije.</div>
-<div class="highlight">TEMELJ jo nadgrajuje z odgovornostjo, razumevanjem in sposobnostjo učenja v svetu kompleksnosti.</div>
+    <div class="hero-item">
+      <a href="assets/platforma_temelj.png" target="_blank" rel="noopener">
+        <img src="assets/platforma_temelj.png" alt="TEMELJ – shema delovanja" loading="lazy" />
+      </a>
+      <div class="hero-caption">TEMELJ – podatkovni tok, sodelovanje in nadzor</div>
+    </div>
 
-<h2>NAMEN DOKUMENTA</h2>
-<p>Ta dokument predstavlja celovito razdelan model odločanja in demokratične participacije, ki temelji na podatkih in dokazih, aktivni vendar neobvezni vlogi državljanov, delegiranem odločanju ter digitalni platformi kot hrbtenici sistema.</p>
-<p>TEMELJ ni politični program. TEMELJ je sistem pravil, po katerih se politike oblikujejo, preverjajo in popravljajo.</p>
+  </section>
 
-<h2>1. PROBLEM OBSTOJEČEGA SISTEMA</h2>
-<p>Težava sodobne demokracije ni pomanjkanje volitev, temveč pomanjkanje razumevanja, preglednosti in odgovornosti.</p>
-<p>Današnji sistemi odločanja temeljijo na všečnosti namesto na učinkih, sprejemajo odločitve brez jasnih ciljev, redko merijo rezultate, neuspehe skrivajo ali relativizirajo ter državljane obravnavajo kot volivce, ne kot soudeležence.</p>
-<p>Sodobna družba je kompleksna, prepletena in dolgoročna. Orodja, s katerimi jo upravljamo, pa so pogosto enostavna, kratkoročna in zastarela.</p>
-<p>TEMELJ je odgovor na to neskladje.</p>
+  <section class="card">
+    <h2>Kaj je TEMELJ?</h2>
+    <p>
+      TEMELJ je koncept platforme za podatkovno vodeno odločanje, ki povezuje
+      državne podatke, strokovna mnenja in sodelovanje državljanov v enoten,
+      pregleden sistem.
+    </p>
 
-<h2>2. ODLOČANJE NA PODLAGI PODATKOV</h2>
-<h3>2.1 Izhodišče</h3>
-<p>V sodobni državi večina odločitev ni kompleksna zato, ker bi bile nerazumljive, temveč zato, ker so podatki razdrobljeni, posledice niso jasno predstavljene, odločitve niso preverljive za nazaj in razprave temeljijo na mnenjih namesto na dokazih.</p>
-<div class="highlight">Nobena sistemska odločitev ne sme biti sprejeta brez jasne, javno preverljive utemeljitve.</div>
+    <div class="highlight">
+      Transparentno odločanje · simulacije posledic · merljivi rezultati
+    </div>
 
-<h3>2.2 Nacionalni podatkovni sloj</h3>
-<p>Nacionalni podatkovni sloj je enoten, anonimiziran podatkovni ekosistem države.</p>
-<ul>
-<li>statistični podatki</li>
-<li>finančni tokovi</li>
-<li>infrastrukturni podatki</li>
-<li>okoljski kazalniki</li>
-<li>demografski trendi</li>
-</ul>
-
-<h3>2.3 Odločitveni okvir</h3>
-<ul>
-<li>opis problema</li>
-<li>merljivi cilji</li>
-<li>scenariji in status quo</li>
-<li>simulacija učinkov</li>
-<li>tveganja in negotovosti</li>
-<li>časovni horizont</li>
-</ul>
-
-<h3>2.4 Simulacijski sistem</h3>
-<p>Simulacije niso napoved prihodnosti, temveč orodje za razumevanje posledic in zaščita pred ideološkimi odločitvami.</p>
-
-<h3>2.5 Merjenje uspešnosti</h3>
-<p>Vsaka sprejeta odločitev dobi merila uspešnosti, roke preverjanja in javni status uspešnosti.</p>
-
-<h2>3. PARTICIPATIVNA IN DELEGIRANA DEMOKRACIJA</h2>
-<h3>3.1 Problem klasične demokracije</h3>
-<p>Rešitev ni manj demokracije, temveč bolj inteligentna demokracija.</p>
-
-<h3>3.2 Liquid democracy</h3>
-<p>Vsak državljan ima en glas in popoln nadzor nad tem, kako se ta glas uporablja.</p>
-
-<h3>3.3 Vloga državljana</h3>
-<p>Državljan ni pasiven volivec in ni prisiljen sodelovati. Ima pravico, ne dolžnosti.</p>
-
-<h3>3.4 Razprava in deliberacija</h3>
-<p>Razprava poteka strukturirano, argumentirano in z vidnimi viri. Ne šteje glasnost, temveč kakovost argumenta.</p>
-
-<h2>4. DIGITALNA PLATFORMA</h2>
-<h3>4.1 Namen</h3>
-<p>Platforma ni družbeno omrežje, temveč orodje za odločanje in javni nadzorni mehanizem.</p>
-
-<h3>4.2 Glavni moduli</h3>
-<ul>
-<li>modul odločitev</li>
-<li>modul podatkov</li>
-<li>modul sodelovanja</li>
-<li>modul delegacij</li>
-<li>modul nadzora</li>
-</ul>
-
-<h3>4.3 Uporabniška izkušnja</h3>
-<p>Platforma je večnivojska in prilagojena različnim stopnjam vključenosti.</p>
-
-<h3>4.4 Varnost in zaupanje</h3>
-<p>Zaupanje je posledica digitalne identitete, odprte kode in neodvisnih revizij.</p>
-
-<h2>5. PRIMER UPORABE – ZDRAVSTVO</h2>
-<p><strong>Izziv:</strong> dolgotrajne čakalne dobe, neučinkoviti procesi, nezadovoljstvo pacientov in osebja.</p>
-<p><strong>Potek:</strong> zaznava problema s podatki, oblikovanje scenarijev, simulacija učinkov, razprava in delegirano odločanje, izvajanje ter nadzor.</p>
-<p><strong>Rezultat:</strong> merljivo skrajšane čakalne dobe, večja učinkovitost in večje zaupanje javnosti.</p>
-
-<h2>6. SKUPNI MODEL</h2>
-<p>Sistem loči odločanje od ideologije, omogoča sodelovanje brez prisile, meri uspešnost namesto obljub in daje državi sposobnost učenja.</p>
-
-<h2>7. NASLEDNJI KORAKI</h2>
-<ul>
-<li>izbor pilotnega področja</li>
-<li>razvoj minimalne platforme</li>
-<li>javna razprava</li>
-<li>testiranje v realnem okolju</li>
-</ul>
-
-</div>
-</div>
-
-<!-- SECOND TAB: NEW, ADDED WITHOUT TOUCHING FIRST -->
-<div id="platforma" class="tab">
-<div class="card">
-
-<h2>PLATFORMA TEMELJ</h2>
-<p><strong>Državni operacijski sistem za odločanje</strong></p>
-
-<p>Platforma TEMELJ ni aplikacija v klasičnem smislu in ni »e-uprava 2.0«.
-Je sistemska infrastruktura za javno odločanje, ki združuje podatke, ljudi in odgovornost v enoten proces.</p>
-
-<p>Njena vloga ni vladanje namesto ljudi, temveč:</p>
-<ul>
-<li>omogočanje razumnega odločanja,</li>
-<li>preprečevanje sistemskih napak,</li>
-<li>dolgoročno učenje države kot sistema.</li>
-</ul>
-
-<h3>1. OSNOVNA IDEJA PLATFORME</h3>
-<p>Platforma deluje kot operacijski sistem države, ne kot politično orodje.</p>
-
-<p>Če danes velja:</p>
-<ul>
-<li>politika = govorjenje,</li>
-<li>odločanje = zaprt proces,</li>
-<li>odgovornost = razpršena,</li>
-</ul>
-
-<p>potem v TEMELJU velja:</p>
-<ul>
-<li>odločanje = proces,</li>
-<li>politika = vhod,</li>
-<li>odgovornost = merljiva posledica.</li>
-</ul>
-
-<p>Platforma ne določa vsebine odločitev, temveč določa:</p>
-<ul>
-<li>kako se odločitve oblikujejo,</li>
-<li>kako se preverjajo,</li>
-<li>kako se jih nadzoruje.</li>
-</ul>
-
-<h3>2. VSTOPNA STRAN (HOME)</h3>
-<p>Vstopna stran daje državljanu prvič jasen odgovor na vprašanje:</p>
-<div class="highlight">»Kaj država trenutno dejansko počne?«</div>
-
-<p>Uporabnik vidi:</p>
-<ul>
-<li>odprte odločitve (analiza, razprava, glasovanje),</li>
-<li>odločitve v izvajanju,</li>
-<li>zaključene odločitve z rezultati,</li>
-<li>hitre sistemske kazalnike.</li>
-</ul>
-
-<ul>
-<li>zdravstvo</li>
-<li>gospodarstvo</li>
-<li>okolje</li>
-<li>javne finance</li>
-</ul>
-
-<p>Ti kazalniki niso politični slogani, temveč trendi, odstopanja in alarmi.</p>
-
-<p><em>Občutek uporabnika:</em><br>
-»Prvič razumem stanje države brez razlage nekoga drugega.«</p>
-
-<h3>3. STRAN POSAMEZNE ODLOČITVE</h3>
-<p>Vsaka odločitev ima eno stran.</p>
-<p><strong>Ena odločitev = ena zgodba = en proces.</strong></p>
-
-<h4>3.1 Povzetek v 30 sekundah</h4>
-<ul>
-<li>Kaj je problem?</li>
-<li>Zakaj je pomemben?</li>
-<li>Kaj se zgodi, če ne naredimo nič?</li>
-</ul>
-
-<h4>3.2 Cilji</h4>
-<ul>
-<li>Kaj želimo izboljšati?</li>
-<li>Kako se to meri?</li>
-<li>V kakšnem času?</li>
-</ul>
-
-<h4>3.3 Scenariji</h4>
-<ul>
-<li>možnost A</li>
-<li>možnost B</li>
-<li>status quo</li>
-</ul>
-
-<p>Brez »prave« in »napačne« izbire – samo različne posledice.</p>
-
-<h4>3.4 Vizualni učinki</h4>
-<ul>
-<li>grafi</li>
-<li>časovnice</li>
-<li>primeri iz vsakdanjega življenja</li>
-</ul>
-
-<p>Sistem razlaga namesto uporabnika.</p>
-
-<h3>4. SIMULACIJE – SRCE PLATFORME</h3>
-<p>Simulacije niso napoved prihodnosti, temveč:</p>
-<ul>
-<li>razkritje posledic,</li>
-<li>konec ideoloških sporov,</li>
-<li>skupni referenčni okvir.</li>
-</ul>
-
-<p>Uporabnik lahko vidi vpliv na proračun, ljudi in okolje v času (1, 5, 10 let).</p>
-
-<h3>5. RAZPRAVA – BREZ HRUPA</h3>
-<p>Razprava ni forum in ni družbeno omrežje.</p>
-
-<p>Vsak argument mora imeti razlago, vir in logično povezavo.</p>
-
-<p>Ni žalitev, populizma ali anonimnega kričanja.</p>
-
-<h3>6. GLASOVANJE IN DELEGACIJE</h3>
-<p>Vsak državljan ima en glas in popoln nadzor nad njegovo uporabo.</p>
-
-<ul>
-<li>glasujem sam,</li>
-<li>delegiram glas drugi osebi,</li>
-<li>delegiram glas po področjih.</li>
-</ul>
-
-<p>Delegacija je vidna, začasna in kadarkoli preklicljiva.</p>
-
-<h3>7. KPI IN NADZOR</h3>
-<p>Vsaka odločitev ima cilje, roke in kazalnike uspešnosti.</p>
-
-<p>Če odločitev ne deluje, sistem to jasno pokaže.</p>
-
-<h3>8. UPORABNIŠKE VLOGE</h3>
-<ul>
-<li><strong>Državljan</strong> – povzetki, glasovanje, delegiranje</li>
-<li><strong>Napreden uporabnik</strong> – podatki, simulacije</li>
-<li><strong>Strokovnjak</strong> – modeli, scenariji</li>
-<li><strong>Nadzor</strong> – KPI, odstopanja</li>
-</ul>
-
-<h3>9. VARNOST IN ZAUPANJE</h3>
-<p>Platforma temelji na digitalni identiteti, kriptografiji, odprti kodi in neodvisnih revizijah.</p>
-
-<h3>10. KLJUČNA RAZLIKA OD DANES</h3>
-<ul>
-<li>Danes: politika govori, sistem skriva.</li>
-<li>TEMELJ: sistem pokaže, meri in ohranja odgovornost.</li>
-</ul>
-
-<h3>SKLEP</h3>
-<p>Platforma TEMELJ ni utopija, temveč nadgradnja demokracije in orodje za odraslo družbo.</p>
-
-</div>
-</div>
+    <p>
+      Cilj platforme je omogočiti jasno razumevanje, kaj država trenutno počne,
+      kakšni so učinki odločitev in kako uspešni so sprejeti ukrepi skozi čas.
+    </p>
+  </section>
 
 </main>
 
-<footer>Avtor: Uroš Japelj · 2026</footer>
+<footer>
+  TEMELJ · Koncept odprte, pregledne in odgovorne države
+</footer>
 
 </body>
 </html>
